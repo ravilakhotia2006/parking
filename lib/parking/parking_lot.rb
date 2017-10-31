@@ -1,5 +1,7 @@
 module Parking
   class ParkingLot
+    include Query::ParkingLotQuery
+
     attr_accessor :parking_levels,
                   :num_levels,
                   :slots
