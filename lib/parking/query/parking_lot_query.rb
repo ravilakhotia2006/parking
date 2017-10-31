@@ -6,7 +6,9 @@ module Query
 
       parking_levels.each do |level|
         level.parking_slots.each do |slot|
-          slots << slot if slot.vehicle.color.eql?(color)
+          if !slot.vehicle.nil? && slot.vehicle.color.eql?(color)
+            slots << slot
+          end
         end
       end
 
@@ -16,7 +18,9 @@ module Query
     def slot_by_reg_no(reg_no)
       parking_levels.each do |level|
         level.parking_slots.each do |slot|
-          return slot if slot.vehicle.reg_no.eql?(reg_no)
+          if !slot.vehicle.nil? && slot.vehicle.reg_no.eql?(reg_no)
+            return slot
+          end
         end
       end
       nil
