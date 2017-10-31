@@ -22,12 +22,26 @@ describe FileParser do
 
   describe '#process' do
     it 'should process bulk input for lines' do
+      parser = FileParser.new(@file)
+
+      parser.process
+
+      # expect_any_instance_of(Processor::CommandProcessor).to receive(:process).once
+      expect(parser.bulk_input).to eq true
     end
 
     it 'should process single line input' do
+      parser = FileParser.new
+
+      parser.process
+
+      expect(parser.bulk_input).to eq false
     end
 
     it 'should raises exception for unkown command' do
+      parser = FileParser.new('specs/support/wrong_command.txt')
+
+      expect { parser.process }.to_not raise_error
     end
   end
 end
