@@ -1,3 +1,5 @@
+# Command::SlotNumbersForCarsWithColour.new.execute(lot, { color: :white })
+
 module Command
   class SlotNumbersForCarsWithColour < BasicCommand
     def execute(lot, opts={})
