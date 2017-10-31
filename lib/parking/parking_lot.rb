@@ -10,7 +10,8 @@ module Parking
       raise "Number of slots should be an integer" unless opts[:slots].class.eql?(Fixnum)
       @slots = opts[:slots]
 
-      initialize_parking_levels(opts[:slots])
+      initialize_parking_levels(opts[:slots]) if !@slots.eql?(0)
+
       puts "Created a parking lot with #{opts[:slots]} slots"
     end
 
