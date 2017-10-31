@@ -62,11 +62,11 @@ module Parking
       @parking_levels ||= []
     end
 
+    private
+
     def level_of(slot_no)
       slot_no / ParkingLevel.max_slots + 1
     end
-
-    private
 
     def initialize_parking_levels(num)
       if num > ParkingLevel.max_slots
