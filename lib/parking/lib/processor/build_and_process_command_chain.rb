@@ -18,12 +18,12 @@ module Processor
       chain = []
 
       @stack.each do |command|
-        klass, _args = command
+        klass, args = command
 
         if klass.class.eql?(Class) && klass.new.respond_to?(:execute)
-          chain << ->(object) { klass.new.execute(object) }
+          chain << ->(object) { klass.new.execute(object, args) }
         elsif klass.respond_to?(:execute)
-          chain << ->(object) { klass.execute(object) }
+          chain << ->(object) { klass.execute(object, args) }
         else
           raise "#{klass} does not implement \'call\' which is required for Chain of Responsibility pattern to work."
         end

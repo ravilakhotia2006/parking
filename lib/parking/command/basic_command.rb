@@ -1,6 +1,6 @@
 module Command
   class BasicCommand
-    def execute(opts={})
+    def execute(object, opts={})
       raise NotImplementedError
     end
   end
