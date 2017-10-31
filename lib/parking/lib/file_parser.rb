@@ -3,7 +3,7 @@ class FileParser
 
   def initialize(file=nil)
     unless file.nil?
-      bulk_input = true
+      @bulk_input = true
       File.open(file).each do |line|
         lines << line
       end
@@ -15,7 +15,7 @@ class FileParser
   end
 
   def process(lot=nil)
-    if bulk_input
+    if @bulk_input
       stack = build_command_stack
 
       command_chain = Processor::CommandProcessor.new do |chain|
