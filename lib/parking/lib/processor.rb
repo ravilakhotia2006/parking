@@ -1,2 +1,5 @@
+require_relative 'processor/build_and_process_command_chain'
+require_relative 'processor/command_processor'
+
 module Processor
 end
