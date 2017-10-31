@@ -3,10 +3,23 @@
 require_relative 'lib/parking'
 
 if ARGV[0].nil?
-  # interactive
-else
-  # file parser
-  #
+  parking_lot = nil
 
+  while(1)
+    puts "Input:\n"
+    line = gets.chomp
+
+    puts "Output:\n"
+
+    if line.empty?
+      puts "Please enter a valid command\n"
+    else
+      parser = FileParser.new
+
+      parser.lines.push(line)
+      parking_lot = parser.process(parking_lot)
+    end
+  end
+else
   FileParser.new(ARGV[0]).process
 end

@@ -1,7 +1,12 @@
 class FileParser
-  def initialize(file)
-    File.open(file).each do |line|
-      lines << line
+  attr_accessor :bulk_input
+
+  def initialize(file=nil)
+    unless file.nil?
+      bulk_input = true
+      File.open(file).each do |line|
+        lines << line
+      end
     end
   end
 
@@ -9,14 +14,21 @@ class FileParser
     @lines ||= []
   end
 
-  def process
-    stack = build_command_stack
+  def process(lot=nil)
+    if bulk_input
+      stack = build_command_stack
 
-    command_chain = Processor::CommandProcessor.new do |chain|
-      stack.each { |item| chain.add *item }
+      command_chain = Processor::CommandProcessor.new do |chain|
+        stack.each { |item| chain.add *item }
+      end
+
+      command_chain.process(nil)
+    else
+      command_class_name, args_hash = build_command_from(lines.first)
+      return command_class_name.new.execute(lot, args_hash)
     end
-
-    command_chain.process(nil)
+  rescue NameError
+    puts "Command Not found\n"
   end
 
   private
@@ -55,13 +67,18 @@ class FileParser
     command_stack = []
 
     lines.each do |line|
-      command_with_args = line.split(' ')
-      command_class_name = class_name_from command_with_args[0]
-      args_hash = args_from command_with_args
-
+      command_class_name, args_hash = build_command_from(line)
       command_stack << [command_class_name, args_hash]
     end
 
     command_stack
+  end
+
+  def build_command_from line
+    command_with_args = line.split(' ')
+    command_class_name = class_name_from command_with_args[0]
+    args_hash = args_from command_with_args
+
+    return command_class_name, args_hash
   end
 end
