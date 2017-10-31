@@ -19,6 +19,7 @@ module Query
           return slot if slot.vehicle.reg_no.eql?(reg_no)
         end
       end
+      nil
     end
   end
 end

@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require_relative 'lib/parking'
+
+if ARGV[0].nil?
+  # interactive
+else
+  # file parser
+  #
+
+  FileParser.new(ARGV[0]).process
+end

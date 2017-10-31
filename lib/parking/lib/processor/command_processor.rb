@@ -30,6 +30,8 @@
 
 module Processor
   class CommandProcessor
+    attr_accessor :stack
+
     def initialize(_args = {}, &block)
       @stack = []
       instance_eval(&block) if block_given?

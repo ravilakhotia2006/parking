@@ -11,6 +11,7 @@ module Parking
       @slots = opts[:slots]
 
       initialize_parking_levels(opts[:slots])
+      puts "Created a parking lot with #{opts[:slots]} slots"
     end
 
     def status
