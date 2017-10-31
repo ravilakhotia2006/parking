@@ -28,21 +28,25 @@ module Parking
     end
 
     def park!(reg_no, color)
-      parked = false
+      if reg_no.nil? || color.nil?
+        puts "Please make sure that both registration number and colot is passed"
+      else
+        parked = false
 
-      parking_levels.each do |level|
-        level.parking_slots.each do |slot|
-          if slot.available?
-            slot.assign(Vehicle::Car.new(reg_no: reg_no, color: color))
-            parked = true
+        parking_levels.each do |level|
+          level.parking_slots.each do |slot|
+            if slot.available?
+              slot.assign(Vehicle::Car.new(reg_no: reg_no, color: color))
+              parked = true
 
-            puts "Allocated slot number: #{slot.slot_no}\n"
-            break
+              puts "Allocated slot number: #{slot.slot_no}\n"
+              break
+            end
           end
         end
-      end
 
-      puts "Sorry, parking lot is full\n" unless parked
+        puts "Sorry, parking lot is full\n" unless parked
+      end
       self
     end
 
