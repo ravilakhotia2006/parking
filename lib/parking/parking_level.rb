@@ -16,12 +16,6 @@ module Parking
       @parking_slots ||= []
     end
 
-    def empty_slots
-    end
-
-    def add_slot
-    end
-
     def initialize_parking_slots(slot_num)
       start = (@level_no - 1) * ParkingLevel.max_slots + 1
 
