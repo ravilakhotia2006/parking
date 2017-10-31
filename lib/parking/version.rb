@@ -1,7 +1,6 @@
 require_relative 'vehicle'
 require_relative 'command'
 require_relative 'lib/processor'
-require_relative 'lib/factory'
 require_relative 'query'
 require_relative 'parking_slot'
 require_relative 'parking_lot'
