@@ -6,7 +6,7 @@ module Vehicle
 
     def initialize(opts={})
       @reg_no = opts[:reg_no] unless opts[:reg_no].nil?
-      @color = opts[:color] unless opts[:color].nil?
+      @color = opts[:color].downcase.to_sym unless opts[:color].nil?
     end
   end
 end

@@ -8,5 +8,9 @@ module Vehicle
     def type
       :car
     end
+
+    def color=(c)
+      @color = c.downcase.to_sym
+    end
   end
 end
