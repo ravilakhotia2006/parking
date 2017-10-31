@@ -14,6 +14,10 @@ class FileParser
     @lines ||= []
   end
 
+  def bulk_input
+    @bulk_input ||= false
+  end
+
   def process(lot=nil)
     if @bulk_input
       stack = build_command_stack
