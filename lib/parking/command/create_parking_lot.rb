@@ -1,7 +1,7 @@
 module Command
   class CreateParkingLot < BasicCommand
     def execute(object, opts={})
-      puts "executing create parking lot command with opts #{opts}"
+      Parking::ParkingLot.new(opts[:slots])
     end
   end
 end

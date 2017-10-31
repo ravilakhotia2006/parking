@@ -1,10 +1,7 @@
 module Command
   class Park < BasicCommand
     def execute(lot, opts={})
-      puts "executing park command with opts #{opts}"
-
-
-      lot
+      lot.park!(opts[:reg_no], opts[:color])
     end
   end
 end

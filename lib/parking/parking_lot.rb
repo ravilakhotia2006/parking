@@ -25,7 +25,7 @@ module Parking
       end
     end
 
-    def park(reg_no, color)
+    def park!(reg_no, color)
       parked = false
 
       parking_levels.each do |level|
@@ -41,9 +41,10 @@ module Parking
       end
 
       puts "Sorry, parking lot is full\n" unless parked
+      self
     end
 
-    def leave(slot_no)
+    def leave!(slot_no)
       level = level_of(slot_no)
 
       puts "level #{level} for slot_no #{slot_no}"
@@ -58,6 +59,7 @@ module Parking
       slot.clear
 
       puts "Slot number #{slot.slot_no} is free\n"
+      self
     end
 
     def parking_levels
