@@ -24,28 +24,35 @@ module Parking
     end
 
     def park(reg_no, color)
+      parked = false
+
       parking_levels.each do |level|
         level.parking_slots.each do |slot|
           if slot.available?
-            slot.vehicle = Vehicle::Car.new(reg_no: reg_no, color: color)
-            puts "Allocated slot number: #{slot.slot_no}\n"
+            slot.assign(Vehicle::Car.new(reg_no: reg_no, color: color))
+            parked = true
 
+            puts "Allocated slot number: #{slot.slot_no}\n"
             break
           end
         end
       end
+
+      puts "Sorry, parking lot is full\n" unless parked
     end
 
     def leave(slot_no)
       level = level_of(slot_no)
 
+      puts "level #{level} for slot_no #{slot_no}"
       if slot_no < ParkingLevel.max_slots
         slot_in_level = slot_no
       else
         slot_in_level = slot_no - (level - 1) * ParkingLevel.max_slots
       end
 
-      slot = parking_levels[level_of(slot_no)].parking_slots[slot_in_level]
+      puts "slot in level #{slot_in_level}"
+      slot = parking_levels[level_of(slot_no) - 1].parking_slots[slot_in_level - 1]
       slot.clear
 
       puts "Slot number #{slot.slot_no} is free\n"
