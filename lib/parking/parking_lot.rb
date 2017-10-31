@@ -47,14 +47,12 @@ module Parking
     def leave!(slot_no)
       level = level_of(slot_no)
 
-      puts "level #{level} for slot_no #{slot_no}"
       if slot_no < ParkingLevel.max_slots
         slot_in_level = slot_no
       else
         slot_in_level = slot_no - (level - 1) * ParkingLevel.max_slots
       end
 
-      puts "slot in level #{slot_in_level}"
       slot = parking_levels[level_of(slot_no) - 1].parking_slots[slot_in_level - 1]
       slot.clear
 
