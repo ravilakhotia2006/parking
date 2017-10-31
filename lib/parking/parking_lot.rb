@@ -47,18 +47,22 @@ module Parking
     end
 
     def leave!(slot_no)
-      level = level_of(slot_no)
-
-      if slot_no < ParkingLevel.max_slots
-        slot_in_level = slot_no
+      if slot_no.eql?(0)
+        puts "Please mention the slot no\n"
       else
-        slot_in_level = slot_no - (level - 1) * ParkingLevel.max_slots
+        level = level_of(slot_no)
+
+        if slot_no < ParkingLevel.max_slots
+          slot_in_level = slot_no
+        else
+          slot_in_level = slot_no - (level - 1) * ParkingLevel.max_slots
+        end
+
+        slot = parking_levels[level_of(slot_no) - 1].parking_slots[slot_in_level - 1]
+        slot.clear
+
+        puts "Slot number #{slot.slot_no} is free\n"
       end
-
-      slot = parking_levels[level_of(slot_no) - 1].parking_slots[slot_in_level - 1]
-      slot.clear
-
-      puts "Slot number #{slot.slot_no} is free\n"
       self
     end
 
